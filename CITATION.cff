@@ -1,0 +1,16 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite the software and the accompanying paper."
+title: "TensegritySim"
+type: software
+authors:
+  - family-names: "Brown"
+    given-names: "Austin"
+repository-code: "https://github.com/TheSmashLab/KC3_Tensegrity_Sim"
+url: "https://github.com/TheSmashLab/KC3_Tensegrity_Sim"
+license: MIT
+version: 1.0.0
+keywords:
+  - tensegrity
+  - simulation
+  - continuous cables
+  - virtual work
