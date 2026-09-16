@@ -1,5 +1,5 @@
 [build-system]
-requires = ["setuptools"]
+requires = ["setuptools>=68"]
 build-backend = "setuptools.build_meta"
 
 [project]
@@ -10,17 +10,29 @@ authors = [
 ]
 description = "A tensegrity simulation library."
 readme = "README.md"
+requires-python = ">=3.9,<3.13"
+license = { file = "LICENSE" }
 classifiers = [
     "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
-keywords = ["tensegrity"]
+keywords = ["tensegrity", "simulation", "continuous cables", "virtual work"]
 dependencies = [
     "numpy",
     "matplotlib",
     "PyYAML",
     "scipy",
 ]
+
+[project.urls]
+Homepage = "https://github.com/TheSmashLab/KC3_Tensegrity_Sim"
+Documentation = "https://github.com/TheSmashLab/KC3_Tensegrity_Sim/tree/main/docs/sphinx"
+Repository = "https://github.com/TheSmashLab/KC3_Tensegrity_Sim"
+Issues = "https://github.com/TheSmashLab/KC3_Tensegrity_Sim/issues"
+
+[project.optional-dependencies]
+test = ["pytest>=7"]
 
 [tool.setuptools]
 packages = ["TensegritySim"]

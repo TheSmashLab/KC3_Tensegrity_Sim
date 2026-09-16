@@ -1,6 +1,6 @@
 # Tensegrity Sim
 
-This repo contains code to create a simulation for tensegrity structures. It allows for continuous cables and 2D, 2.5D and 3D structures. 
+This repository contains a simulation framework for tensegrity structures. It supports continuous cables and 2D, 2.5D, and 3D structures.
 
 ## Research Context
 
@@ -10,30 +10,52 @@ The software is designed to support reproducible simulation of static equilibriu
 
 This software implements the models and numerical methods described in:
 
-> Brown A., Modeling and Simulation of Tensegrity Structures with Continuous Cables, Brigham Young University, 2025
-> Brown et al., TensegritySim Python Package Using Virtual Work, submitted to the ASME Journal of Mechanisms and Robotics.
+> Brown, A. *Modeling and Simulation of Tensegrity Structures with Continuous Cables*. Brigham Young University, 2025.
+>
+> Brown et al. “TensegritySim Python Package Using Virtual Work.” Submitted to the *ASME Journal of Mechanisms and Robotics*.
 
-All simulations presented in the paper can be reproduced using the configuration files provided in the `yaml` directory.
+Configuration files used by the project are provided in the `yaml` directory. See the [reproducibility guide](REPRODUCIBILITY.md) for the environment, commands, and the paper-to-configuration mapping that should be completed before publication.
 
 ## Reproducibility and Usage
 
 To get started with development, clone the repo and install the dependencies.
 
-I reccommend using a venv to keep the libraries for this project separate from the main python interpreter. To create a venv, from the project's main directory run `python3 -m venv ./venv`. Now everytime you want to use this venv run `source venv/bin/activate`. To deactivate simply use the `deactivate` command. 
+Python 3.9–3.12 is supported. We recommend using a virtual environment to keep this project's dependencies separate from the system Python installation:
 
-This project uses Python3, in order to run it you will need some dependencies. To get them you can run `pip install -r requirements.txt` (with the venv active)
+```bash
+python3 -m venv .venv
+source .venv/bin/activate  # Linux/macOS
+# .venv\Scripts\activate   # Windows PowerShell
+python -m pip install --upgrade pip
+python -m pip install -r requirements.txt
+```
 
 To run the project:
 ```bash
 python3 main.py <path/to/yaml/config>
 ```
-Sample yaml config files are provided in the `yaml` directory. To understand how to change the simulation to your needs, see the [simulation setup](docs/setup.md) documentation. 
+Sample YAML configuration files are provided in the `yaml` directory. See the [simulation setup](docs/sphinx/content/setup.md) and [YAML reference](docs/sphinx/content/yaml.md) for details.
+
+The program opens Matplotlib windows and then accepts control-length changes interactively in the terminal. Enter `q` to quit. The optional structure-building GUI can be launched with:
+
+```bash
+python GUI/GUI_frontend.py
+```
 
 ## Installation
 
-If instead of helping develop the project you want to use it as a library, you can install it using pip. To install the project, to use as a library, run `pip install .` from the project's main directory. This will install the `TensegritySim` module and allow you to import it in your own projects.
+To use the project as a library, run `python -m pip install .` from the repository root. This installs the `TensegritySim` module so it can be imported by other projects.
 
-If you want to install from a different directory, you can run `pip install <path/to/project>` or `pip install -e <path/to/project>` to install in editable mode. Or without cloning the repo, you can run `pip install git+<git-repo-url>`.
+For development, install the package and test dependencies in editable mode and run the tests:
+
+```bash
+python -m pip install -e ".[test]"
+python -m pytest -q
+```
+
+## Citation
+
+Use the repository's **Cite this repository** menu, which is generated from [`CITATION.cff`](CITATION.cff). Cite a tagged, archived release rather than the moving `main` branch when a release DOI becomes available.
 
 ## Definitions and Conventions (as used in this project)
 Strings - Strings are connection types that only carry tension, they lengthen as force is applied  
@@ -63,11 +85,11 @@ The current implementation supports static equilibrium analysis of tensegrity st
 `main.py` provides an example entry point for running simulations using YAML-defined models and control inputs.
 
 ### TensegritySim Module
-The `TensegritySim` directory contains all the code TensegritySim python module.
-* `data_structures.py` contains the `Node`, `Connection`, `Control`, and `Tensegrity` classes
-* `yaml_parser.py` reads the yaml file and returns the Tensegrity object. See [YAML Reference](docs/yaml.md) for how to format the yaml file
+The `TensegritySim` directory contains the Python package.
+* `data_structures.py` contains the `Node`, `Connection`, `Surface`, and `Tensegrity` classes
+* `yaml_parser.py` reads a YAML file and returns a `Tensegrity` object. See the [YAML reference](docs/sphinx/content/yaml.md)
 * `visualization.py` shows the tensegrity structure using matplotlib
 * `tensegrity_solver.py` uses an optimizer to solve for an updated structure
 
 ### yaml
-The `yaml` directory contains sample yaml files for running the sim
+The `yaml` directory contains sample YAML files for running the simulation.
